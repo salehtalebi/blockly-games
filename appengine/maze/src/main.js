@@ -26,6 +26,7 @@ goog.require('BlocklyCode');
 goog.require('BlocklyDialogs');
 goog.require('BlocklyGames');
 goog.require('BlocklyInterface');
+goog.require('Slider');
 goog.require('Maze.Blocks');
 goog.require('Maze.html');
 
@@ -285,6 +286,7 @@ let finish_;
 let pegmanX;
 let pegmanY;
 let pegmanD;
+let speedSlider;
 
 /**
  * Log of Pegman's moves.  Recorded during execution, played back for animation.
@@ -464,6 +466,14 @@ function init() {
     blocklyDiv.style.left = rtl ? '10px' : '420px';
     blocklyDiv.style.width = (window.innerWidth - 440) + 'px';
   };
+
+   // Initialize the slider.
+   const sliderSvg = BlocklyGames.getElementById('slider');
+   speedSlider = new Slider(10, 35, 130, sliderSvg);
+
+
+
+
   window.addEventListener('scroll', function() {
     onresize(null);
     Blockly.svgResize(BlocklyInterface.workspace);
@@ -1114,6 +1124,8 @@ function animate() {
       setTimeout(BlocklyCode.congratulations, 1000);
   }
 
+  const stepSpeed = 1000 * Math.pow(1 - speedSlider.getValue(), 2);
+  
   pidList.push(setTimeout(animate, stepSpeed * 5));
 }
 
