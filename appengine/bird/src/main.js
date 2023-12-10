@@ -26,6 +26,7 @@ goog.require('BlocklyCode');
 goog.require('BlocklyDialogs');
 goog.require('BlocklyGames');
 goog.require('BlocklyInterface');
+goog.require('Slider');
 
 
 BlocklyGames.storageName = 'bird';
@@ -40,6 +41,7 @@ const FLAP_SPEED = 100; // ms.
 /**
  * Milliseconds between each animation frame.
  */
+let speedSlider;
 let stepSpeed;
 let pos;
 let angle;
@@ -382,6 +384,11 @@ function init() {
     blocklyDiv.style.left = rtl ? '10px' : '420px';
     blocklyDiv.style.width = (window.innerWidth - 440) + 'px';
   };
+
+  // Initialize the slider.
+  const sliderSvg = BlocklyGames.getElementById('slider');
+  speedSlider = new Slider(10, 35, 130, sliderSvg);
+
   window.addEventListener('scroll', function() {
     onresize(null);
     Blockly.svgResize(BlocklyInterface.workspace);
@@ -403,6 +410,8 @@ function init() {
   }
   // Not really needed, there are no user-defined functions or variables.
   Blockly.JavaScript.addReservedWords('noWorm,heading,getX,getY');
+
+  
 
   drawMap();
 
@@ -761,6 +770,7 @@ function animate() {
     BlocklyInterface.workspace.getAudioManager().play(action[1], 0.5);
   }
 
+  const stepSpeed = 1000 * Math.pow(1 - speedSlider.getValue(), 2);
   pidList.push(setTimeout(animate, stepSpeed * 5));
 }
 

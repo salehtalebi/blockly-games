@@ -49,3 +49,10 @@ button.primary {
 html[dir="RTL"] button.primary {
   text-align: right;
 }
+
+/* speed controller slider */
+.sliderTrack {
+  stroke: #aaa;
+  stroke-width: 6px;
+  stroke-linecap: round;
+}
