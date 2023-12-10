@@ -1,3 +1,8 @@
+## افزودن html مربوط به نوار کنترل سرعت
+## افزودن کد های مربوط به جاوااسکریپت و تغییرات بر روی متد انیمیشن
+## افزودن استایل مربوط به نوار کنترل سرعت
+
+
 ## 3 - feat(bird speed controller): add speed control slider to bird game
      
 - **Author:** s.talebi
